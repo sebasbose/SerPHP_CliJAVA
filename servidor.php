@@ -7,6 +7,19 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+function stringToArray($str) {
+    // Quita los corchetes y espacios
+    $str = trim($str, "[] ");
+    
+    // Divide la cadena por comas
+    $items = explode(",", $str);
+    
+    // Convierte cada elemento en número entero
+    $numbers = array_map('intval', $items);
+    
+    return $numbers;
+}
+
 if ($method == 'GET') {
     // Responder con un mensaje simple en SOAP
     $soap_response = 
@@ -23,20 +36,27 @@ if ($method == 'GET') {
     $soap_input = file_get_contents('php://input');
     
     // Extraer datos simples del SOAP
-    $input = '';
-    
-    if (preg_match('/<input>(.*?)<\/input>/', $soap_input, $matches)) {
-        $input = $matches[1];
+    $dividends = '';
+    $divider = 1;
+
+    if (preg_match('/<dividends>(.*?)<\/dividends>/', $soap_input, $matches)) {
+        $dividends = $matches[1];
+    }
+    if (preg_match('/<divider>(.*?)<\/divider>/', $soap_input, $matches)) {
+        $divider = intval($matches[1]);
     }
 
     // Lógica para procesar los numeros recibidos
-    $output = intval($input) * 5; // Ejemplo: multiplicar por 5
-    
+    $dividends = stringToArray($dividends);
+    $output = array_filter($dividends, function($num) use ($divider) {
+        return $num % $divider == 0;
+    });
+
     $soap_response = 
     '<?xml version="1.0" encoding="UTF-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
-            <output>' . htmlspecialchars($output) . '</output>
+            <output>' . htmlspecialchars(implode(", ", $output)) . '</output>
         </soap:Body>
     </soap:Envelope>';
     echo $soap_response;

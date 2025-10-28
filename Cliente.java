@@ -18,7 +18,8 @@ public class Cliente {
         
         // Hacer petición POST
         System.out.println("Haciendo petición POST...");
-        cliente.hacerPeticionPOST(10);
+        cliente.hacerPeticionPOST("[1, 5, 23, 25, 35, 78, 30, 96]", 5);
+        cliente.hacerPeticionPOST("[3, 20, 15]", 3);
     }
     
     public void hacerPeticionGET() {
@@ -46,7 +47,7 @@ public class Cliente {
         }
     }
     
-    public void hacerPeticionPOST(int number) {
+    public void hacerPeticionPOST(String dividends, int divider) {
         try {
             URL url = new URL(SERVER_URL);
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
@@ -59,7 +60,8 @@ public class Cliente {
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
                 "<soap:Body>" +
-                    "<input>" + number + "</input>" +
+                    "<dividends>" + dividends + "</dividends>" +
+                    "<divider>" + divider + "</divider>" +
                 "</soap:Body>" +
             "</soap:Envelope>";
             
