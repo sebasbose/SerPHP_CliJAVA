@@ -13,10 +13,7 @@ if ($method == 'GET') {
     '<?xml version="1.0" encoding="UTF-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
-            <output>
-                <status>success</status>
-                <message>Hola desde el servidor PHP!</message>
-            </output>
+            <output>Hola desde el servidor PHP!</output>
         </soap:Body>
     </soap:Envelope>';
     echo $soap_response;
@@ -26,22 +23,20 @@ if ($method == 'GET') {
     $soap_input = file_get_contents('php://input');
     
     // Extraer datos simples del SOAP
-    $nombre = '';
-    $edad = '';
-    $mensaje = '';
+    $input = '';
     
-    if (preg_match('/<mensaje>(.*?)<\/mensaje>/', $soap_input, $matches)) {
-        $mensaje = $matches[1];
+    if (preg_match('/<input>(.*?)<\/input>/', $soap_input, $matches)) {
+        $input = $matches[1];
     }
+
+    // Lógica para procesar los numeros recibidos
+    $output = intval($input) * 5; // Ejemplo: multiplicar por 5
     
     $soap_response = 
     '<?xml version="1.0" encoding="UTF-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
-            <output>
-                <status>success</status>
-                <message>' . htmlspecialchars($mensaje) . '</message>
-            </output>
+            <output>' . htmlspecialchars($output) . '</output>
         </soap:Body>
     </soap:Envelope>';
     echo $soap_response;
@@ -53,10 +48,7 @@ if ($method == 'GET') {
     '<?xml version="1.0" encoding="UTF-8"?>
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
-            <output>
-                <status>error</status>
-                <message>Método no permitido</message>
-            </output>
+            <output>Método no permitido</output>
         </soap:Body>
     </soap:Envelope>';
 }

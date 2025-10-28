@@ -10,15 +10,15 @@ public class Cliente {
         
         System.out.println("=== Cliente Java - Comunicación SOAP con Servidor PHP ===\n");
         
-        // Hacer petición GET
-        System.out.println("1. Haciendo petición GET...");
-        cliente.hacerPeticionGET();
+        // // Hacer petición GET
+        // System.out.println("Haciendo petición GET...");
+        // cliente.hacerPeticionGET();
         
-        System.out.println("\n" + "=".repeat(50) + "\n");
+        // System.out.println("\n" + "=".repeat(50) + "\n");
         
         // Hacer petición POST
-        System.out.println("2. Haciendo petición POST...");
-        cliente.hacerPeticionPOST();
+        System.out.println("Haciendo petición POST...");
+        cliente.hacerPeticionPOST(10);
     }
     
     public void hacerPeticionGET() {
@@ -46,7 +46,7 @@ public class Cliente {
         }
     }
     
-    public void hacerPeticionPOST() {
+    public void hacerPeticionPOST(int number) {
         try {
             URL url = new URL(SERVER_URL);
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
@@ -59,9 +59,7 @@ public class Cliente {
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
                 "<soap:Body>" +
-                    "<input>" +
-                        "<mensaje>Hola desde Java!</mensaje>" +
-                    "</input>" +
+                    "<input>" + number + "</input>" +
                 "</soap:Body>" +
             "</soap:Envelope>";
             
