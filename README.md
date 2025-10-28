@@ -38,13 +38,34 @@ El cliente mostrará algo como:
 ```
 === Cliente Java - Comunicación con Servidor PHP ===
 
-1. Haciendo petición GET...
+Haciendo petición GET...
 Código de respuesta: 200
-Respuesta del servidor: {"status":"success","message":"Hola desde el servidor PHP!","timestamp":"2024-10-27 20:45:30"}
+Respuesta SOAP del servidor: 
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <output>Hola desde el servidor PHP!</output>
+  </soap:Body>
+</soap:Envelope>
 
 ==================================================
 
-2. Haciendo petición POST...
+Haciendo petición POST...
 Código de respuesta: 200
-Respuesta del servidor: {"status":"success","message":"Datos recibidos correctamente","received_data":{"nombre":"Juan","edad":25,"mensaje":"Hola desde Java!"},"timestamp":"2024-10-27 20:45:30"}
+Respuesta SOAP del servidor: 
+  <?xml version="1.0" encoding="UTF-8"?>    
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <output>5, 25, 35, 30</output>
+    </soap:Body>
+  </soap:Envelope>
+
+Código de respuesta: 200
+Respuesta SOAP del servidor: 
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <output>3, 15</output>
+  </soap:Body>
+</soap:Envelope>
 ```
