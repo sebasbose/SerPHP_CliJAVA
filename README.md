@@ -24,12 +24,12 @@ java Cliente
 
 **Servidor PHP:**
 - Responde a peticiones GET con un mensaje de saludo
-- Acepta peticiones POST con datos JSON y los devuelve
-- Retorna respuestas en formato JSON
+- Acepta peticiones POST con datos SOAP y los devuelve
+- Retorna respuestas en formato SOAP
 
 **Cliente Java:**
 - Hace una petición GET al servidor
-- Hace una petición POST enviando datos JSON
+- Hace una petición POST enviando datos SOAP
 - Muestra las respuestas del servidor
 
 ## Ejemplo de salida:
