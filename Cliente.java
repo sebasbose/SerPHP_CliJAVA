@@ -8,7 +8,7 @@ public class Cliente {
     public static void main(String[] args) {
         Cliente cliente = new Cliente();
         
-        System.out.println("=== Cliente Java - Comunicación con Servidor PHP ===\n");
+        System.out.println("=== Cliente Java - Comunicación SOAP con Servidor PHP ===\n");
         
         // Hacer petición GET
         System.out.println("1. Haciendo petición GET...");
@@ -39,7 +39,7 @@ public class Cliente {
             }
             reader.close();
             
-            System.out.println("Respuesta del servidor: " + respuesta.toString());
+            System.out.println("Respuesta SOAP del servidor: " + respuesta.toString());
             
         } catch (Exception e) {
             System.out.println("Error en petición GET: " + e.getMessage());
@@ -51,15 +51,22 @@ public class Cliente {
             URL url = new URL(SERVER_URL);
             HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
             conexion.setRequestMethod("POST");
-            conexion.setRequestProperty("Content-Type", "application/json");
+            conexion.setRequestProperty("Content-Type", "text/xml");
             conexion.setDoOutput(true);
             
-            // Datos a enviar
-            String jsonData = "{\"nombre\":\"Juan\",\"edad\":25,\"mensaje\":\"Hola desde Java!\"}";
+            // Datos SOAP a enviar
+            String soapData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                    "<soap:Body>" +
+                        "<input>" +
+                            "<mensaje>Hola desde Java!</mensaje>" +
+                        "</input>" +
+                    "</soap:Body>" +
+                "</soap:Envelope>";
             
             // Enviar datos
             OutputStream os = conexion.getOutputStream();
-            os.write(jsonData.getBytes());
+            os.write(soapData.getBytes());
             os.flush();
             os.close();
             
@@ -75,7 +82,7 @@ public class Cliente {
             }
             reader.close();
             
-            System.out.println("Respuesta del servidor: " + respuesta.toString());
+            System.out.println("Respuesta SOAP del servidor: " + respuesta.toString());
             
         } catch (Exception e) {
             System.out.println("Error en petición POST: " + e.getMessage());
