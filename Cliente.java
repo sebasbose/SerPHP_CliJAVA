@@ -55,14 +55,15 @@ public class Cliente {
             conexion.setDoOutput(true);
             
             // Datos SOAP a enviar
-            String soapData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
-                    "<soap:Body>" +
-                        "<input>" +
-                            "<mensaje>Hola desde Java!</mensaje>" +
-                        "</input>" +
-                    "</soap:Body>" +
-                "</soap:Envelope>";
+            String soapData = 
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+            "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                "<soap:Body>" +
+                    "<input>" +
+                        "<mensaje>Hola desde Java!</mensaje>" +
+                    "</input>" +
+                "</soap:Body>" +
+            "</soap:Envelope>";
             
             // Enviar datos
             OutputStream os = conexion.getOutputStream();

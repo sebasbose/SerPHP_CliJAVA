@@ -9,15 +9,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($method == 'GET') {
     // Responder con un mensaje simple en SOAP
-    $soap_response = '<?xml version="1.0" encoding="UTF-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <output>
-            <status>success</status>
-            <message>Hola desde el servidor PHP!</message>
-        </output>
-    </soap:Body>
-</soap:Envelope>';
+    $soap_response = 
+    '<?xml version="1.0" encoding="UTF-8"?>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+            <output>
+                <status>success</status>
+                <message>Hola desde el servidor PHP!</message>
+            </output>
+        </soap:Body>
+    </soap:Envelope>';
     echo $soap_response;
     
 } elseif ($method == 'POST') {
@@ -33,28 +34,30 @@ if ($method == 'GET') {
         $mensaje = $matches[1];
     }
     
-    $soap_response = '<?xml version="1.0" encoding="UTF-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <output>
-            <status>success</status>
-            <message>' . htmlspecialchars($mensaje) . '</message>
-        </output>
-    </soap:Body>
-</soap:Envelope>';
+    $soap_response = 
+    '<?xml version="1.0" encoding="UTF-8"?>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+            <output>
+                <status>success</status>
+                <message>' . htmlspecialchars($mensaje) . '</message>
+            </output>
+        </soap:Body>
+    </soap:Envelope>';
     echo $soap_response;
     
 } else {
     // Método no soportado
     http_response_code(405);
-    echo '<?xml version="1.0" encoding="UTF-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <output>
-            <status>error</status>
-            <message>Método no permitido</message>
-        </output>
-    </soap:Body>
-</soap:Envelope>';
+    echo 
+    '<?xml version="1.0" encoding="UTF-8"?>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+            <output>
+                <status>error</status>
+                <message>Método no permitido</message>
+            </output>
+        </soap:Body>
+    </soap:Envelope>';
 }
 ?>
